@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class SnsConfiguration (
         // TODO: get a new key for this
-        @Value("\${amazon.aws.ses.access-key-id}") private val accessKeyId: String,
-        @Value("\${amazon.aws.ses.access-key-secret}") private val accessKeySecret: String
+        @Value("\${amazon.aws.sns.access-key-id}") private val accessKeyId: String,
+        @Value("\${amazon.aws.sns.access-key-secret}") private val accessKeySecret: String
 ) {
     /**
      * Spring Bean that will return a [AmazonSNS] object with

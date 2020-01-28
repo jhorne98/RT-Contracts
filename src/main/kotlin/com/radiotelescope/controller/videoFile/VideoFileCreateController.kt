@@ -8,6 +8,7 @@ import com.radiotelescope.controller.model.Result
 import com.radiotelescope.controller.spring.Logger
 import com.radiotelescope.controller.model.videoFile.CreateForm
 import com.radiotelescope.repository.log.Log
+import com.radiotelescope.service.sns.AwsSnsSendService
 import com.radiotelescope.toStringMap
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody
 class VideoFileCreateController(
         private val videoFileWrapper: UserVideoFileWrapper,
         private val profile: Profile,
+        private val awsSnsSendService: AwsSnsSendService,
         logger: Logger
 ) : BaseRestController(logger) {
 
@@ -66,6 +68,9 @@ class VideoFileCreateController(
                     uuid = uuid,
                     profile = profile.toString()
             ).execute()
+
+            awsSnsSendService.execute()
+
             // If the command was a success
             response.success?.let { data ->
                 // Create success log

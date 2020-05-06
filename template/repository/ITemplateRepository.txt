@@ -1,0 +1,9 @@
+package com.radiotelescope.repository.{NAME_CAMEL}
+
+import org.springframework.stereotype.Repository
+
+/**
+ * Spring Repository for the [{NAME_FIRST_CAPITAL}] Entity
+ */
+@Repository
+interface I{NAME_FIRST_CAPITAL}Repository

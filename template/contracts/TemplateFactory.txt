@@ -1,0 +1,9 @@
+package com.radiotelescope.contracts.{NAME_CAMEL}
+
+import com.radiotelescope.repository.{NAME_CAMEL}.{NAME_FIRST_CAPITAL}
+
+/**
+ * Abstract factory interface with methods for all [{NAME_FIRST_CAPITAL}] operations
+ */
+interface {NAME_FIRST_CAPITAL}Factory {
+}

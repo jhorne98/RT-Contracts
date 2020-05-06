@@ -1,0 +1,16 @@
+package com.radiotelescope.contracts.{NAME_CAMEL}
+
+import com.radiotelescope.security.UserContext
+
+/**
+ * Wrapper that takes a [{NAME_FIRST_CAPITAL}Factory] and is responsible for all
+ * user role validations for the {NAME_FIRST_CAPITAL} Entity
+ *
+ * @property context the [UserContext] interface
+ * @property factory the [{NAME_FIRST_CAPITAL}Factory interface
+ */
+class User{NAME_FIRST_CAPITAL}Wrapper(
+        private val context: UserContext,
+        private val factory: {NAME_FIRST_CAPITAL}Factory
+) {
+}

@@ -1,0 +1,14 @@
+package com.radiotelescope.contracts.{NAME_CAMEL}
+
+import com.radiotelescope.repository.{NAME_CAMEL}.I{NAME_FIRST_CAPITAL}Repository
+import com.radiotelescope.repository.{NAME_CAMEL}.{NAME_FIRST_CAPITAL}
+
+/**
+ * Base concrete implementation of the [{NAME_FIRST_CAPITAL}Factory] interface
+ *
+ * @param {NAME_CAMEL}Repo the [I{NAME_FIRST_CAPITAL}Repository] interface
+ */
+class Base{NAME_FIRST_CAPITAL}Factory(
+        private val {NAME_CAMEL}Repo: I{NAME_FIRST_CAPITAL}Repository
+) : {NAME_FIRST_CAPITAL}Factory {
+}

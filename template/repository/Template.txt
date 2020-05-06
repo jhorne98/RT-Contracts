@@ -1,0 +1,24 @@
+package com.radiotelescope.repository.{NAME_CAMEL}
+
+import java.util.*
+import javax.persistence.*
+
+/**
+ * Entity Class representing a {NAME_FIRST_CAPITAL} for the web-application
+ *
+ * This Entity correlates to the {NAME_CAMEL} SQL table"
+ */
+@Entity
+@Table(name = "{NAME_CAMEL}")
+data class {NAME_FIRST_CAPITAL}() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
+    var id: Long = 0
+
+    @Column(name = "insert_timestamp", nullable = false)
+    var recordCreatedTimestamp: Date = Date()
+
+    @Column(name = "update_timestamp", nullable = true)
+    var recordUpdatedTimestamp: Date = Date()
+}

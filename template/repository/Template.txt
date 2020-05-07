@@ -9,7 +9,7 @@ import javax.persistence.*
  * This Entity correlates to the {NAME_CAMEL} SQL table"
  */
 @Entity
-@Table(name = "{NAME_CAMEL}")
+@Table(name = "{NAME_TABLE}")
 data class {NAME_FIRST_CAPITAL}() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

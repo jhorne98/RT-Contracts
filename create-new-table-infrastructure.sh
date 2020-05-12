@@ -7,6 +7,13 @@
 # This input will be used to generate a camel-case string (sampleInfrastructureAddition)
 # and a database table formatted string (sample_infrastructure_addition)
 
+# Blank input: give error and terminate
+if [ -z "$1" ]
+then
+  echo "Table name needed as argument."
+  exit 3
+fi
+
 # Generate camel-case string
 camel=$(echo -e $1 | awk '{print tolower(substr($0,1,1)) substr($0,2);}')
 

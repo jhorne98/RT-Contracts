@@ -117,9 +117,9 @@ internal class UserFrontpagePictureWrapperTest : AbstractSpringTest() {
     }
 
     @Test
-    fun alumnusRetrieveList_Success() {
+    fun alumniRetrieveList_Success() {
         context.login(admin.id)
-        context.currentRoles.add(UserRole.Role.ALUMNUS)
+        context.currentRoles.add(UserRole.Role.ALUMNI)
 
         val error = wrapper.retrieveList {
             assertNotNull(it.success)

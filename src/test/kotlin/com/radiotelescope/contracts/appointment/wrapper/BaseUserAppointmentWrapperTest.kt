@@ -329,10 +329,10 @@ internal class BaseUserAppointmentWrapperTest : AbstractSpringTest() {
     }
 
     @Test
-    fun testValidGetFutureAppointmentsForUser_Alumnus_Success() {
+    fun testValidGetFutureAppointmentsForUser_Alumni_Success() {
         // Simulate a login
         context.login(admin.id)
-        context.currentRoles.add(UserRole.Role.ALUMNUS)
+        context.currentRoles.add(UserRole.Role.ALUMNI)
 
         val error = wrapper.userFutureList(
                 pageable = PageRequest.of(0, 10),
@@ -463,10 +463,10 @@ internal class BaseUserAppointmentWrapperTest : AbstractSpringTest() {
     }
 
     @Test
-    fun testPastAppointmentsForUserList_Alumnus_Success() {
+    fun testPastAppointmentsForUserList_Alumni_Success() {
         // Log the user in as an admin
         context.login(user2.id)
-        context.currentRoles.addAll(listOf(UserRole.Role.USER, UserRole.Role.ALUMNUS))
+        context.currentRoles.addAll(listOf(UserRole.Role.USER, UserRole.Role.ALUMNI))
 
         val error = wrapper.userCompleteList(
                 userId = user.id,
@@ -760,10 +760,10 @@ internal class BaseUserAppointmentWrapperTest : AbstractSpringTest() {
     }
 
     @Test
-    fun testListRequest_Alumnus_Success() {
+    fun testListRequest_Alumni_Success() {
         // Simulate a login and make the user a researcher
         context.login(user.id)
-        context.currentRoles.add(UserRole.Role.ALUMNUS)
+        context.currentRoles.add(UserRole.Role.ALUMNI)
 
         val error = wrapper.requestedList(
                 pageable = PageRequest.of(0, 10)

@@ -55,7 +55,7 @@ class UserFrontpagePictureWrapper (
      */
     fun retrieveList(withAccess: (result: SimpleResult<List<FrontpagePicture>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         return context.requireAny(
-                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.retrieveList()
         ).execute(withAccess)
     }

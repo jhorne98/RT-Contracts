@@ -89,6 +89,6 @@ data class Appointment(
         // 48 hours for members, alumni, and researchers
         const val MEMBER_APPOINTMENT_TIME_CAP: Long = (48 * 60 * 60 * 1000)
         const val RESEARCHER_APPOINTMENT_TIME_CAP: Long = (48 * 60 * 60 * 1000)
-        const val ALUMNUS_APPOINTMENT_TIME_CAP: Long = (48 * 60 * 60 * 1000)
+        const val ALUMNI_APPOINTMENT_TIME_CAP: Long = (48 * 60 * 60 * 1000)
     }
 }

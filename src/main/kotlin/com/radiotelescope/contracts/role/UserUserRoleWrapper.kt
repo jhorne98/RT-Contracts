@@ -75,12 +75,12 @@ class UserUserRoleWrapper(
     fun retrieve(id: Long, withAccess: (result: SimpleResult<UserRoleInfo, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         context.currentUserId()?.let {
             return context.requireAny(
-                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.retrieve(id)
             ).execute(withAccess)
         }
 
-        return AccessReport(missingRoles = listOf(UserRole.Role.USER, UserRole.Role.ADMIN, UserRole.Role.ALUMNUS), invalidResourceId = null)
+        return AccessReport(missingRoles = listOf(UserRole.Role.USER, UserRole.Role.ADMIN, UserRole.Role.ALUMNI), invalidResourceId = null)
     }
 
     /**

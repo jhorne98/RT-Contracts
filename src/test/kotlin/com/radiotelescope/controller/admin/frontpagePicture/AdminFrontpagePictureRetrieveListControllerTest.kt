@@ -66,11 +66,11 @@ internal class AdminFrontpagePictureRetrieveListControllerTest : BaseFrontpagePi
         }
     }
 
-    fun testSuccessResponseAlumnus() {
+    fun testSuccessResponseAlumni() {
         getContext().login(user.id)
         // Make user an admin
-        getContext().currentRoles.add(UserRole.Role.ALUMNUS)
-        testUtil.createUserRoleForUser(user, UserRole.Role.ALUMNUS, true)
+        getContext().currentRoles.add(UserRole.Role.ALUMNI)
+        testUtil.createUserRoleForUser(user, UserRole.Role.ALUMNI, true)
 
         val result = frontpagePictureRetrieveListController.execute()
 

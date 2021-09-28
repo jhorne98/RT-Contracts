@@ -189,10 +189,10 @@ internal class UserUserWrapperTest : AbstractSpringTest() {
     }
 
     @Test
-    fun testValidRetrieve_Alumnus_Success() {
+    fun testValidRetrieve_Alumni_Success() {
         // Simulate login as admin
         context.login(otherUserId)
-        context.currentRoles.add(UserRole.Role.ALUMNUS)
+        context.currentRoles.add(UserRole.Role.ALUMNI)
 
         var userInfo: UserInfo? = null
 
@@ -287,10 +287,10 @@ internal class UserUserWrapperTest : AbstractSpringTest() {
     }
 
     @Test
-    fun testValidList_Alumnus_Success() {
+    fun testValidList_Alumni_Success() {
         // Log the user in and make them an admin
         context.login(otherUserId)
-        context.currentRoles.addAll(listOf(UserRole.Role.ALUMNUS, UserRole.Role.USER))
+        context.currentRoles.addAll(listOf(UserRole.Role.ALUMNI, UserRole.Role.USER))
 
         var info: Page<UserInfo> = PageImpl<UserInfo>(arrayListOf())
 

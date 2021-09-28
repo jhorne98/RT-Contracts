@@ -72,7 +72,7 @@ class UserUserWrapper(
                     ).execute(withAccess)
                 } else {
                     context.requireAny(
-                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                             successCommand = factory.retrieve(request)
                     ).execute(withAccess)
                 }
@@ -93,12 +93,12 @@ class UserUserWrapper(
     fun list(request: Pageable, withAccess: (result: SimpleResult<Page<UserInfo>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if (context.currentUserId() != null) {
             return context.requireAny(
-                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.list(request)
             ).execute(withAccess)
         }
 
-        return AccessReport(missingRoles = listOf(UserRole.Role.USER, UserRole.Role.ADMIN, UserRole.Role.ALUMNUS), invalidResourceId = null)
+        return AccessReport(missingRoles = listOf(UserRole.Role.USER, UserRole.Role.ADMIN, UserRole.Role.ALUMNI), invalidResourceId = null)
     }
 
     /**

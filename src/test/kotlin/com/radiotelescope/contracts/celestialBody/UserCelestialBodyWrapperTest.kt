@@ -162,10 +162,10 @@ internal class UserCelestialBodyWrapperTest : AbstractSpringTest() {
     }
 
     @Test
-    fun testRetrieve_Alumnus_Success() {
+    fun testRetrieve_Alumni_Success() {
         // Simulate a login
         context.login(adminId)
-        context.currentRoles.add(UserRole.Role.ALUMNUS)
+        context.currentRoles.add(UserRole.Role.ALUMNI)
 
         val error = wrapper.retrieve(celestialBody.id) {
             assertNotNull(it.success)
@@ -218,10 +218,10 @@ internal class UserCelestialBodyWrapperTest : AbstractSpringTest() {
     }
 
     @Test
-    fun testList_Alumnus_Success() {
+    fun testList_Alumni_Success() {
         // Simulate a login
         context.login(adminId)
-        context.currentRoles.add(UserRole.Role.ALUMNUS)
+        context.currentRoles.add(UserRole.Role.ALUMNI)
 
         val error = wrapper.list(PageRequest.of(0, 10)) {
             assertNotNull(it.success)

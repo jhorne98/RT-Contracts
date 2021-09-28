@@ -65,7 +65,7 @@ open class BaseUserAppointmentWrapper(
             ).execute(withAccess)
         } else {
             return context.requireAny(
-                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.retrieve(id)
             ).execute(withAccess)
         }
@@ -91,10 +91,10 @@ open class BaseUserAppointmentWrapper(
                         )
                 ).execute(withAccess)
             }
-            // Otherwise, they need to be an admin or alumnus
+            // Otherwise, they need to be an admin or alumni
             else {
                 return context.requireAny(
-                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.userFutureList(
                                 userId = userId,
                                 pageable = pageable
@@ -127,7 +127,7 @@ open class BaseUserAppointmentWrapper(
                 ).execute(withAccess)
             } else {
                 context.requireAny(
-                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.userCompletedList(
                                 userId = userId,
                                 pageable = pageable
@@ -276,7 +276,7 @@ open class BaseUserAppointmentWrapper(
     fun requestedList(pageable: Pageable, withAccess: (result: SimpleResult<Page<AppointmentInfo>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if(context.currentUserId() != null) {
             return context.requireAny(
-                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.requestedList(
                             pageable = pageable
                     )

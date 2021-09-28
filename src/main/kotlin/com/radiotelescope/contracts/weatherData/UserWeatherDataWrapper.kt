@@ -43,7 +43,7 @@ class UserWeatherDataWrapper (
     fun retrieveList(pageable: Pageable, withAccess: (result: SimpleResult<Page<WeatherData>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if(context.currentUserId() != null) {
             return context.requireAny(
-                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.retrieveList(
                             pageable = pageable
                     )

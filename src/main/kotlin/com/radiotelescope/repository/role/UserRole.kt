@@ -41,6 +41,6 @@ data class UserRole(
         RESEARCHER("Researcher"),
         MEMBER("Member"),
         ADMIN("Admin"),
-        ALUMNUS("Alumnus")
+        ALUMNI("Alumni")
     }
 }

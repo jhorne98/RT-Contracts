@@ -60,8 +60,8 @@ class UserAutoAppointmentWrapper(
                 ).execute(withAccess)
             // Otherwise, they need to be an admin
             else
-                context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.create(request)
                 ).execute(withAccess)
         }
@@ -104,8 +104,8 @@ class UserAutoAppointmentWrapper(
                     ).execute(withAccess)
                 // Otherwise, they must be an admin
                 else
-                    context.require(
-                            requiredRoles = listOf(UserRole.Role.ADMIN),
+                    context.requireAny(
+                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                             successCommand = factory.update(
                                     request = request
                             )
@@ -113,8 +113,8 @@ class UserAutoAppointmentWrapper(
             }
             // Otherwise, they need to be an admin
             else {
-                return context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                return context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.update(
                                 request = request
                         )
@@ -142,14 +142,14 @@ class UserAutoAppointmentWrapper(
                 ).execute(withAccess)
             // If primary, but not public, they need to be a researcher
             else if (request.priority == Appointment.Priority.PRIMARY)
-                context.require(
+                context.requireAny(
                         requiredRoles = listOf(UserRole.Role.USER, UserRole.Role.RESEARCHER),
                         successCommand = factory.request(request)
                 ).execute(withAccess)
             // Otherwise, they must be an admin
             else
-                context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.request(request)
                 ).execute(withAccess)
         }

@@ -41,8 +41,8 @@ class UserFrontpagePictureWrapper (
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun approveDeny(request: ApproveDeny.Request, withAccess: (result: SimpleResult<FrontpagePicture, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.approveDeny(request)
         ).execute(withAccess)
     }

@@ -30,8 +30,8 @@ class UserCelestialBodyWrapper(
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun create(request: Create.Request, withAccess: (result: SimpleResult<Long, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.create(request)
         ).execute(withAccess)
     }
@@ -95,8 +95,8 @@ class UserCelestialBodyWrapper(
      * @return an [AccessReport] if authentication fails, null otherwise
      */
     fun update(request: Update.Request, withAccess: (result: SimpleResult<Long, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.update(request)
         ).execute(withAccess)
     }

@@ -43,8 +43,8 @@ class UserManualAppointmentWrapper(
      */
     fun startAppointment(request: StartFreeControlAppointment.Request, withAccess: (result: SimpleResult<Long, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.startAppointment(request)
             ).execute(withAccess)
         }
@@ -62,8 +62,8 @@ class UserManualAppointmentWrapper(
      */
     fun addCommand(request: AddFreeControlAppointmentCommand.Request, withAccess: (result: SimpleResult<Long, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.addCommand(request)
             ).execute(withAccess)
         }
@@ -81,8 +81,8 @@ class UserManualAppointmentWrapper(
      */
     fun stopAppointment(appointmentId: Long, withAccess: (result: SimpleResult<Long, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.stopAppointment(appointmentId)
             ).execute(withAccess)
         }
@@ -100,8 +100,8 @@ class UserManualAppointmentWrapper(
      */
     fun calibrateAppointment(appointmentId: Long, withAccess: (result: SimpleResult<Long, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.calibrateAppointment(appointmentId)
             ).execute(withAccess)
         }

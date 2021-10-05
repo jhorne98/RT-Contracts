@@ -48,8 +48,12 @@ class RetrieveAuthAdminService(
             it.role == UserRole.Role.ADMIN
         }
 
-        if (!isAdmin) {
-            errors.put(ErrorTag.ROLES, "User is not an admin")
+        val isAlumni = roles.any{
+            it.role == UserRole.Role.ALUMNI
+        }
+
+        if (!isAdmin && !isAlumni) {
+            errors.put(ErrorTag.ROLES, "User is not an admin or an alumni")
 
             return SimpleResult(null, errors)
         }

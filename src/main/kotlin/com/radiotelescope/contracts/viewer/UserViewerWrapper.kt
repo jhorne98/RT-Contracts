@@ -45,14 +45,14 @@ class UserViewerWrapper (
             return if (context.currentUserId() == theAppointment.user.id) {
                 // Admins or researchers can share their own appointments
                 context.requireAny(
-                        requiredRoles = listOf(UserRole.Role.RESEARCHER, UserRole.Role.ADMIN),
+                        requiredRoles = listOf(UserRole.Role.RESEARCHER, UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.sharePrivateAppointment(
                                 request = request
                         )
                 ).execute(withAccess)
             } else {
-                context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.sharePrivateAppointment(
                                 request = request
                         )
@@ -83,8 +83,8 @@ class UserViewerWrapper (
                         )
                 ).execute(withAccess)
             } else {
-                context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.listSharedAppointment(
                                 userId = userId,
                                 pageable = pageable
@@ -122,8 +122,8 @@ class UserViewerWrapper (
                         )
                 ).execute(withAccess)
             } else {
-                context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.listSharedUser(
                                 appointmentId = appointmentId,
                                 pageable = pageable
@@ -159,8 +159,8 @@ class UserViewerWrapper (
                         )
                 ).execute(withAccess)
             } else {
-                context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.unsharePrivateAppointment(
                                 request = request
                         )

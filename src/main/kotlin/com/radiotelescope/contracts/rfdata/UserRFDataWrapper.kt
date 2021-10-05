@@ -61,8 +61,8 @@ class UserRFDataWrapper(
                     }
                     // If not, they must be an admin
                     else {
-                        context.require(
-                                requiredRoles = listOf(UserRole.Role.ADMIN),
+                        context.requireAny(
+                                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                                 successCommand = factory.retrieveAppointmentData(appointmentId)
                         ).execute(withAccess)
                     }

@@ -48,8 +48,8 @@ class UserSpectracyberConfigWrapper (
                             successCommand = factory.update(request)
                     ).execute(withAccess)
                 } else {
-                    context.require(
-                            requiredRoles = listOf(UserRole.Role.ADMIN),
+                    context.requireAny(
+                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                             successCommand = factory.update(request)
                     ).execute(withAccess)
                 }
@@ -85,8 +85,8 @@ class UserSpectracyberConfigWrapper (
                             successCommand = factory.retrieve(spectracyberConfigId)
                     ).execute(withAccess)
                 } else {
-                    context.require(
-                            requiredRoles = listOf(UserRole.Role.ADMIN),
+                    context.requireAny(
+                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                             successCommand = factory.retrieve(spectracyberConfigId)
                     ).execute(withAccess)
                 }

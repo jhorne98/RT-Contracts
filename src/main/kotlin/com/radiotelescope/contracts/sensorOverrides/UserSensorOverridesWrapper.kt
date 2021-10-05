@@ -26,8 +26,8 @@ class UserSensorOverridesWrapper (
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun retrieveList(withAccess: (result: SimpleResult<List<SensorOverrides>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.retrieveList()
         ).execute(withAccess)
     }
@@ -41,8 +41,8 @@ class UserSensorOverridesWrapper (
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun update(sensorName: String, overridden: Boolean, withAccess: (result: SimpleResult<SensorOverrides, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.update(sensorName, overridden)
         ).execute(withAccess)
     }

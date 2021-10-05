@@ -39,8 +39,8 @@ class UserSensorStatusWrapper(
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun retrieve(id: Long, withAccess: (result: SimpleResult<SensorStatus, Multimap<ErrorTag, String>>) -> Unit): AccessReport?  {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.retrieve(id)
         ).execute(withAccess)
     }
@@ -52,8 +52,8 @@ class UserSensorStatusWrapper(
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun getMostRecent(withAccess: (result: SimpleResult<SensorStatus, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.getMostRecent()
         ).execute(withAccess)
     }

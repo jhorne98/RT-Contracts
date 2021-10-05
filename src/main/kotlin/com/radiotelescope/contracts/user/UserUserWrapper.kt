@@ -123,8 +123,8 @@ class UserUserWrapper(
                             successCommand = factory.update(request)
                     ).execute(withAccess)
                 } else {
-                    context.require(
-                            requiredRoles = listOf(UserRole.Role.ADMIN),
+                    context.requireAny(
+                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                             successCommand = factory.update(request)
                     ).execute(withAccess)
                 }
@@ -156,8 +156,8 @@ class UserUserWrapper(
                             successCommand = factory.updateProfilePicture(request)
                     ).execute(withAccess)
                 } else {
-                    context.require(
-                            requiredRoles = listOf(UserRole.Role.ADMIN),
+                    context.requireAny(
+                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                             successCommand = factory.updateProfilePicture(request)
                     ).execute(withAccess)
                 }
@@ -178,8 +178,8 @@ class UserUserWrapper(
     fun approveDenyProfilePicture(request: ApproveDeny.Request, withAccess: (result: SimpleResult<User, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         // If the user is logged in
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.approveDenyProfilePicture(request)
             ).execute(withAccess)
         }
@@ -209,8 +209,8 @@ class UserUserWrapper(
                             successCommand = factory.delete(id)
                     ).execute(withAccess)
                 } else {
-                    context.require(
-                            requiredRoles = listOf(UserRole.Role.ADMIN),
+                    context.requireAny(
+                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                             successCommand = factory.delete(id)
                     ).execute(withAccess)
                 }
@@ -230,8 +230,8 @@ class UserUserWrapper(
      */
     fun ban(id: Long, withAccess: (result: SimpleResult<Long?, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.ban(id)
             ).execute(withAccess)
         }
@@ -250,8 +250,8 @@ class UserUserWrapper(
     fun unban(id: Long, withAccess: (result: SimpleResult<Unban.Response, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         // If the user is logged in
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.unban(id)
             ).execute(withAccess)
         }

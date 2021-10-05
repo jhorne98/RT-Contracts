@@ -27,8 +27,8 @@ class UserThresholdsWrapper (
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun retrieve(sensorName: String, withAccess: (result: SimpleResult<Thresholds, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.retrieve(sensorName)
         ).execute(withAccess)
     }
@@ -40,8 +40,8 @@ class UserThresholdsWrapper (
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun retrieveList(withAccess: (result: SimpleResult<List<Thresholds>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.retrieveList()
         ).execute(withAccess)
     }
@@ -55,8 +55,8 @@ class UserThresholdsWrapper (
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun update(sensorName: String, maximum: Double, withAccess: (result: SimpleResult<Thresholds, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.update(sensorName, maximum)
         ).execute(withAccess)
     }

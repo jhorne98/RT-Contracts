@@ -37,8 +37,8 @@ class UserUserRoleWrapper(
      */
     fun unapprovedList(pageable: Pageable, withAccess: (result: SimpleResult<Page<UserRoleInfo>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.unapprovedList(pageable)
             ).execute(withAccess)
         }
@@ -56,8 +56,8 @@ class UserUserRoleWrapper(
      */
     fun validate(request: Validate.Request, withAccess: (result: SimpleResult<Validate.Response, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         context.currentUserId()?.let {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.validate(request)
             ).execute(withAccess)
         }
@@ -108,8 +108,8 @@ class UserUserRoleWrapper(
                     return if (!theRequestedUser.isPresent)
                         AccessReport(missingRoles = null, invalidResourceId = invalidUserIdErrors(request.userId))
                     else
-                        context.require(
-                                requiredRoles = listOf(UserRole.Role.ADMIN),
+                        context.requireAny(
+                                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                                 successCommand = factory.requestRole(request)
                         ).execute(withAccess)
                 }

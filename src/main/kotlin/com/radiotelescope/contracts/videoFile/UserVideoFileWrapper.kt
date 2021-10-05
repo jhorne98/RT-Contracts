@@ -43,8 +43,8 @@ class UserVideoFileWrapper(
      */
     fun retrieveList(pageable: Pageable, withAccess: (result: SimpleResult<Page<VideoFile>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if(context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.retrieveList(
                             pageable = pageable
                     )
@@ -63,8 +63,8 @@ class UserVideoFileWrapper(
      */
     fun listBetweenCreationDates(request: ListBetweenCreationDates.Request, withAccess: (result: SimpleResult<List<VideoFile>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if(context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.listBetweenCreationDates(request)
             ).execute(withAccess)
         }

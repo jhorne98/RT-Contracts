@@ -39,8 +39,8 @@ class UserFeedbackWrapper(
      */
     fun list(pageable: Pageable, withAccess: (result: SimpleResult<Page<Feedback>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if (context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.list(pageable)
             ).execute(withAccess)
         }

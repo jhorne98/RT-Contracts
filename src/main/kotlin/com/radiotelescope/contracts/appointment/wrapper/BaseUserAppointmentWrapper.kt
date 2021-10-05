@@ -163,8 +163,8 @@ open class BaseUserAppointmentWrapper(
                         )
                 ).execute(withAccess)
             } else {
-                context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.cancel(
                                 appointmentId = appointmentId
                         )
@@ -218,8 +218,8 @@ open class BaseUserAppointmentWrapper(
                         )
                 ).execute(withAccess)
             } else {
-                context.require(
-                        requiredRoles = listOf(UserRole.Role.ADMIN),
+                context.requireAny(
+                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                         successCommand = factory.makePublic(
                                 appointmentId = appointmentId
                         )
@@ -296,8 +296,8 @@ open class BaseUserAppointmentWrapper(
      */
     fun approveDenyRequest(request: ApproveDenyRequest.Request, withAccess: (result: SimpleResult<Long, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if(context.currentUserId() != null) {
-            return context.require(
-                    requiredRoles = listOf(UserRole.Role.ADMIN),
+            return context.requireAny(
+                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                     successCommand = factory.approveDenyRequest(
                             request = request
                     )

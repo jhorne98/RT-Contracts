@@ -30,8 +30,8 @@ class AdminLogWrapper(
      * @return An [AccessReport] if authentication fails or null
      */
     fun list(pageable: Pageable, withAccess: (result: SimpleResult<Page<LogInfo>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.USER, UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.USER, UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.list(
                         pageable = pageable
                 )
@@ -47,8 +47,8 @@ class AdminLogWrapper(
      * @return An [AccessReport] if authentication fails or null
      */
     fun retrieveErrors(logId: Long, withAccess: (result: SimpleResult<List<ErrorInfo>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.require(
-                requiredRoles = listOf(UserRole.Role.USER, UserRole.Role.ADMIN),
+        return context.requireAny(
+                requiredRoles = listOf(UserRole.Role.USER, UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
                 successCommand = factory.retrieveErrors(
                         logId = logId
                 )

@@ -48,8 +48,8 @@ class UserSpectracyberConfigWrapper (
                             successCommand = factory.update(request)
                     ).execute(withAccess)
                 } else {
-                    context.requireAny(
-                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
+                    context.require(
+                            requiredRoles = listOf(UserRole.Role.ADMIN),
                             successCommand = factory.update(request)
                     ).execute(withAccess)
                 }

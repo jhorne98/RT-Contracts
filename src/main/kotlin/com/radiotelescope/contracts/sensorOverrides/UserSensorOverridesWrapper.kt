@@ -41,8 +41,8 @@ class UserSensorOverridesWrapper (
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun update(sensorName: String, overridden: Boolean, withAccess: (result: SimpleResult<SensorOverrides, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        return context.requireAny(
-                requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
+        return context.require(
+                requiredRoles = listOf(UserRole.Role.ADMIN),
                 successCommand = factory.update(sensorName, overridden)
         ).execute(withAccess)
     }

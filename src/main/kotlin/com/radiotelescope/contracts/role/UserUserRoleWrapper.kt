@@ -56,8 +56,8 @@ class UserUserRoleWrapper(
      */
     fun validate(request: Validate.Request, withAccess: (result: SimpleResult<Validate.Response, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         context.currentUserId()?.let {
-            return context.requireAny(
-                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
+            return context.require(
+                    requiredRoles = listOf(UserRole.Role.ADMIN),
                     successCommand = factory.validate(request)
             ).execute(withAccess)
         }

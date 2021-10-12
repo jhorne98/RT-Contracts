@@ -51,8 +51,8 @@ class UserViewerWrapper (
                         )
                 ).execute(withAccess)
             } else {
-                context.requireAny(
-                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
+                context.require(
+                        requiredRoles = listOf(UserRole.Role.ADMIN),
                         successCommand = factory.sharePrivateAppointment(
                                 request = request
                         )
@@ -159,8 +159,8 @@ class UserViewerWrapper (
                         )
                 ).execute(withAccess)
             } else {
-                context.requireAny(
-                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
+                context.require(
+                        requiredRoles = listOf(UserRole.Role.ADMIN),
                         successCommand = factory.unsharePrivateAppointment(
                                 request = request
                         )

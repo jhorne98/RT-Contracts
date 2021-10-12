@@ -104,8 +104,8 @@ class UserAutoAppointmentWrapper(
                     ).execute(withAccess)
                 // Otherwise, they must be an admin
                 else
-                    context.requireAny(
-                            requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
+                    context.require(
+                            requiredRoles = listOf(UserRole.Role.ADMIN),
                             successCommand = factory.update(
                                     request = request
                             )
@@ -113,8 +113,8 @@ class UserAutoAppointmentWrapper(
             }
             // Otherwise, they need to be an admin
             else {
-                return context.requireAny(
-                        requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
+                return context.require(
+                        requiredRoles = listOf(UserRole.Role.ADMIN),
                         successCommand = factory.update(
                                 request = request
                         )

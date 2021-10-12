@@ -29,8 +29,8 @@ class UserAllottedTimeCapWrapper(
      */
     fun update(request: Update.Request, withAccess: (result: SimpleResult<AllottedTimeCap, Multimap<ErrorTag, String>>) -> Unit): AccessReport?{
         if(context.currentUserId() != null){
-            return context.requireAny(
-                    requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNI),
+            return context.require(
+                    requiredRoles = listOf(UserRole.Role.ADMIN),
                     successCommand = factory.update(request)
             ).execute(withAccess)
         }

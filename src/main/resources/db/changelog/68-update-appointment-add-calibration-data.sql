@@ -13,4 +13,6 @@ CREATE TABLE appointment_calibration (
     FOREIGN KEY (appointment_id) REFERENCES appointment(id)
 );
 
+CREATE INDEX appointment_id
+ON appointment_calibration (appointment_id);
 -- DROP TABLE appointment_calibration;

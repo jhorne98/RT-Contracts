@@ -61,14 +61,10 @@ class UserWeatherDataWrapper (
      * @return An [AccessReport] if authentication fails, null otherwise
      */
     fun listBetweenCreationDates(request: ListBetweenCreationDates.Request, withAccess: (result: SimpleResult<List<WeatherData>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
-        //if(context.currentUserId() != null) {
             return context.require(
                     requiredRoles = listOf(UserRole.Role.ADMIN),
                     successCommand = factory.listBetweenCreationDates(request = request)
             ).execute(withAccess)
-       // }
-
-        //return AccessReport(missingRoles = listOf(UserRole.Role.ADMIN), invalidResourceId = null)
     }
 
     fun getMostRecent(withAccess: (result: SimpleResult<WeatherData, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {

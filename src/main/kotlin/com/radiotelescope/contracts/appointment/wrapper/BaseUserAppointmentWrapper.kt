@@ -6,6 +6,7 @@ import com.radiotelescope.contracts.SimpleResult
 import com.radiotelescope.contracts.appointment.*
 import com.radiotelescope.contracts.appointment.factory.AppointmentFactory
 import com.radiotelescope.contracts.appointment.info.AppointmentInfo
+import com.radiotelescope.repository.appointment.Appointment
 import com.radiotelescope.repository.appointment.IAppointmentRepository
 import com.radiotelescope.repository.model.appointment.SearchCriteria
 import com.radiotelescope.repository.role.UserRole
@@ -80,14 +81,14 @@ open class BaseUserAppointmentWrapper(
      * @param withAccess anonymous function that uses the command's result object
      * @return An [AccessReport] if authentication fails, null otherwise
      */
-    fun userFutureList(userId: Long, pageable: Pageable, withAccess: (result: SimpleResult<Page<AppointmentInfo>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
+    fun userFutureList(userId: Long, request: UserFutureList.Request,  withAccess: (result: SimpleResult<List<Appointment>, Multimap<ErrorTag, String>>) -> Unit): AccessReport? {
         if(context.currentUserId() != null) {
             if (context.currentUserId() == userId) {
                 return context.require(
                         requiredRoles = listOf(UserRole.Role.USER),
                         successCommand = factory.userFutureList(
                                 userId = userId,
-                                pageable = pageable
+                                request = request
                         )
                 ).execute(withAccess)
             }
@@ -97,7 +98,7 @@ open class BaseUserAppointmentWrapper(
                         requiredRoles = listOf(UserRole.Role.ADMIN, UserRole.Role.ALUMNUS),
                         successCommand = factory.userFutureList(
                                 userId = userId,
-                                pageable = pageable
+                                request = request
                         )
                 ).execute(withAccess)
             }

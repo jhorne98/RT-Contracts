@@ -44,8 +44,6 @@ import com.radiotelescope.contracts.viewer.BaseViewerFactory
 import com.radiotelescope.contracts.viewer.UserViewerWrapper
 import com.radiotelescope.contracts.weatherData.BaseWeatherDataFactory
 import com.radiotelescope.contracts.weatherData.UserWeatherDataWrapper
-import com.radiotelescope.mobileContracts.mobileWeatherData.BaseMobileWeatherDataFactory
-import com.radiotelescope.mobileContracts.mobileWeatherData.UserMobileWeatherDataWrapper
 import com.radiotelescope.security.UserContextImpl
 import com.radiotelescope.security.service.RetrieveAuthUserService
 import com.radiotelescope.service.s3.IAwsS3DeleteService
@@ -401,16 +399,6 @@ class FactoryBeans(
         )
     }
 
-    @Bean
-    override fun getMobileWeatherDataWrapper(): UserMobileWeatherDataWrapper {
-        return UserMobileWeatherDataWrapper(
-            context = userContext,
-            factory = BaseMobileWeatherDataFactory(
-                weatherDataRepo = repositories.weatherDataRepo
-            )
-        )
-    }
-
 
     /**
      * Returns a [UserSpectracyberConfigWrapper] object, allowing it to be autowired
@@ -470,4 +458,5 @@ class FactoryBeans(
                 )
         )
     }
+
 }

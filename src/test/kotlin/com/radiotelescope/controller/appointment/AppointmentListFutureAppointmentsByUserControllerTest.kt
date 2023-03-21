@@ -21,14 +21,14 @@ internal class AppointmentListFutureAppointmentsByUserControllerTest : BaseAppoi
     @Autowired
     private lateinit var logRepo: ILogRepository
 
-    private lateinit var appointmentListFutureAppointmentsByUserController: AppointmentListFutureAppointmentsByUserController
+    private lateinit var appointmentListFutureAppointmentsByUserController: AppointmentListFutureAppointmentsByTelescopeController
     private lateinit var user: User
 
     @Before
     override fun init() {
         super.init()
 
-        appointmentListFutureAppointmentsByUserController = AppointmentListFutureAppointmentsByUserController(
+        appointmentListFutureAppointmentsByUserController = AppointmentListFutureAppointmentsByTelescopeController(
                 autoAppointmentWrapper = getCoordinateCreateWrapper(),
                 logger = getLogger()
         )

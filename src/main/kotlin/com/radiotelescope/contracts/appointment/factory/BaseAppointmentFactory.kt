@@ -83,10 +83,10 @@ open class BaseAppointmentFactory(
      * @param pageable the [Pageable] interface
      * @return the [UserFutureList] command object
      */
-    final override fun userFutureList(userId: Long, pageable: Pageable): Command<Page<AppointmentInfo>, Multimap<ErrorTag, String>> {
+    final override fun userFutureList(userId: Long, request: UserFutureList.Request): Command<List<Appointment>, Multimap<ErrorTag, String>> {
         return UserFutureList(
+                request = request,
                 userId = userId,
-                pageable = pageable,
                 appointmentRepo = appointmentRepo,
                 userRepo = userRepo
         )

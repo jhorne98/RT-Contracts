@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable
  * Abstract factory interface with methods for all [Appointment] Command objects
  */
 interface AppointmentFactory {
+
     /**
      * Abstract command used to cancel an appointment
      *
@@ -53,7 +54,7 @@ interface AppointmentFactory {
      * @param pageable the [Pageable] interface
      * @return a [Command] object
      */
-    fun userFutureList(userId: Long, pageable: Pageable): Command<Page<AppointmentInfo>, Multimap<ErrorTag,String>>
+    fun userFutureList(userId: Long, request: UserFutureList.Request): Command<List<Appointment>, Multimap<ErrorTag,String>>
 
     /**
      * Abstract command used to retrieve a list of appointments between two time

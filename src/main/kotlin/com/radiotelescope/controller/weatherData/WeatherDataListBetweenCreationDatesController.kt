@@ -46,6 +46,8 @@ class WeatherDataListBetweenCreationDatesController(
                 upperDate = upperDate
         )
 
+
+
         // If any of the request params are null, respond with errors
         val errors = form.validateRequest()
         if(errors != null) {
@@ -64,11 +66,11 @@ class WeatherDataListBetweenCreationDatesController(
         // Otherwise, call the wrapper method
         else {
             val request = form.toRequest()
-            weatherDataWrapper.listBetweenCreationDates(request) { response ->
+            weatherDataWrapper.listBetweenCreationDates(request) {
                 // If the command was a success
-                response.success?.let { list ->
+                it.success?.let { list ->
                     // Create success logs for each retrieval
-                    list.forEach { info ->
+                    list.forEach() { info ->
                         logger.createSuccessLog(
                                 info = Logger.createInfo(
                                         Log.AffectedTable.WEATHER_DATA,
@@ -82,7 +84,7 @@ class WeatherDataListBetweenCreationDatesController(
                     result = Result(data = list)
                 }
                 // If the command was a failure
-                response.error?.let { errors ->
+                it.error?.let { errors ->
                     logger.createErrorLogs(
                             info = Logger.createInfo(
                                     affectedTable = Log.AffectedTable.WEATHER_DATA,

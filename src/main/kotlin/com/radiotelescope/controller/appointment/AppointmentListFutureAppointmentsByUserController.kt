@@ -1,10 +1,13 @@
 package com.radiotelescope.controller.appointment
 
 import com.google.common.collect.HashMultimap
+import com.radiotelescope.contracts.appointment.UserFutureList
 import com.radiotelescope.contracts.appointment.wrapper.UserAutoAppointmentWrapper
 import com.radiotelescope.contracts.user.ErrorTag
 import com.radiotelescope.controller.BaseRestController
 import com.radiotelescope.controller.model.Result
+import com.radiotelescope.controller.model.appointment.ListFutureAppointmentByUserForm
+import com.radiotelescope.controller.model.weatherData.ListBetweenCreationDatesForm
 import com.radiotelescope.controller.spring.Logger
 import com.radiotelescope.security.AccessReport
 import com.radiotelescope.repository.log.Log
@@ -45,6 +48,9 @@ class AppointmentListFutureAppointmentsByUserController(
     fun execute(@PathVariable("userId") userId: Long,
                 @RequestParam("page") pageNumber: Int,
                 @RequestParam("size") pageSize: Int): Result {
+
+       val form = ListFutureAppointmentByUserForm( userID = userId)
+
         // If any of the request params are null, respond with errors
         if(pageNumber < 0 || pageSize <= 0) {
             val errors = pageErrors()
@@ -62,21 +68,23 @@ class AppointmentListFutureAppointmentsByUserController(
         }
         // Otherwise, call the wrapper method
         else {
-            val sort = Sort(Sort.Direction.ASC, "start_time")
-            autoAppointmentWrapper.userFutureList(userId, PageRequest.of(pageNumber, pageSize, sort)) {
+            val request = form.toRequest()
+           // val sort = Sort(Sort.Direction.ASC, "start_time")
+            autoAppointmentWrapper.userFutureList(userId, request) {
                 //If the command was a success
-                it.success?.let{ page ->
+                it.success?.let{ list ->
                     // Create success logs
-                    page.content.forEach { info ->
+                    list.forEach { info ->
                         logger.createSuccessLog(
-                                info = Logger.createInfo(Log.AffectedTable.APPOINTMENT,
+                                info = Logger.createInfo(
+                                        affectedTable = Log.AffectedTable.APPOINTMENT,
                                         action = "User Future Appointment List Retrieval",
                                         affectedRecordId = info.id,
                                         status = HttpStatus.OK.value()
                                 )
                         )
                     }
-                    result = Result(data = page)
+                    result = Result(data = list)
                 }
                 // If the command was a failure
                 it.error?.let{ errors ->

@@ -1,5 +1,6 @@
 package com.radiotelescope.repository.appointment
 
+import com.radiotelescope.contracts.appointment.info.AppointmentInfo
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
@@ -29,7 +30,7 @@ interface IAppointmentRepository : PagingAndSortingRepository<Appointment, Long>
             ") / 1000) " +
             "FROM (SELECT * " +
             "FROM appointment " +
-            "WHERE user_id=?1 " +
+            "WHERE user_id=? " +
             "AND end_time > CURRENT_TIMESTAMP " +
             "AND status = 'SCHEDULED' " +
             "AND priority = 'PRIMARY') AS schedule_appointments",
@@ -46,14 +47,21 @@ interface IAppointmentRepository : PagingAndSortingRepository<Appointment, Long>
      */
     @Query(value = "SELECT * " +
             "FROM appointment " +
-            "WHERE user_id=?1 AND end_time > CURRENT_TIMESTAMP() " +
+            "WHERE telescope_id=?1 AND end_time > CURRENT_TIMESTAMP() " +
             "AND status <> 'CANCELED'",
-            countQuery = "SELECT COUNT(*) " +
-                    "FROM appointment " +
-                    "WHERE user_id=?1 AND end_time > CURRENT_TIMESTAMP() " +
-                    "AND status <> 'CANCELED'",
             nativeQuery = true)
-    fun findFutureAppointmentsByUser(userId: Long, pageable: Pageable): Page<Appointment>
+
+//    @Query(value = "SELECT * " +
+//            "FROM appointment " +
+//            "WHERE user_id=?1 AND end_time > CURRENT_TIMESTAMP() " +
+//            "AND status <> 'CANCELED'",
+//        countQuery = "SELECT COUNT(*) " +
+//                "FROM appointment " +
+//                "WHERE user_id=?1 AND end_time > CURRENT_TIMESTAMP() " +
+//                "AND status <> 'CANCELED'",
+//        nativeQuery = true)
+    fun findFutureAppointmentsByUser(userId: Long): List<Appointment>
+
 
     /**
      * Spring Repository method that will return all completed appointments
@@ -63,17 +71,19 @@ interface IAppointmentRepository : PagingAndSortingRepository<Appointment, Long>
      * @param pageable the [Pageable] interface
      * @return a [Page] of [Appointment] objects
      */
+
     @Query(value = "SELECT * " +
             "FROM appointment " +
             "WHERE user_id=?1 " +
-            "AND end_time < CURRENT_TIMESTAMP " +
+            "AND end_time > CURRENT_TIMESTAMP " +
             "AND status <> 'CANCELED' ",
             countQuery = "SELECT COUNT(*) " +
                     "FROM appointment " +
                     "WHERE user_id=?1 " +
-                    "AND end_time < CURRENT_TIMESTAMP " +
+                    "AND end_time > CURRENT_TIMESTAMP " +
                     "AND status <> 'CANCELED'",
             nativeQuery = true)
+
     fun findPreviousAppointmentsByUser(userId: Long, pageable:Pageable): Page<Appointment>
 
     /**

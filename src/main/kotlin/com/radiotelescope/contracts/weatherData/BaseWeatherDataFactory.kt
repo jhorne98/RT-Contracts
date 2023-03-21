@@ -18,7 +18,8 @@ class BaseWeatherDataFactory (
     /**
      * Override of the [WeatherDataFactory.create] method that will return a [Create] command
      *
-     * @param request the [Create.Request] object
+     * @param request the
+     * [Create.Request] object
      * @return a [Create] command object
      */
     override fun create(request: Create.Request): Command<Long, Multimap<ErrorTag, String>> {

@@ -14,7 +14,7 @@ import com.radiotelescope.repository.user.User
  * @param request the [Request] object
  * @param userRepo the [IUserRepository]
  */
-class UpdateProfilePicture(
+class  UpdateProfilePicture(
         private val request: UpdateProfilePicture.Request,
         private val userRepo: IUserRepository
 ): Command<Long, Multimap<ErrorTag, String>> {
